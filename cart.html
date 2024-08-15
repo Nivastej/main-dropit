@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #3BB77E;
+            padding: 10px 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .search-bar-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            margin: 0 20px;
+            max-width: 500px; /* Restrict maximum width */
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 100%; /* Adjust width to fill available space */
+        }
+        .search-bar select, .search-bar input {
+            height: 30px;
+            border: none;
+            padding: 0 10px;
+        }
+        .search-bar select {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            margin-right: -1px;
+        }
+        .search-bar input {
+            flex: 1;
+            border-radius: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .search-icon img {
+            height: 25px;
+            cursor: pointer;
+        }
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        .icons img {
+            height: 25px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .profile-icon img {
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .background {
+            background-image: url(assets/images/veggies.jpeg); 
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: left;
+            color: #333;
+                        
+        }
+        
+        .breadcrumbs {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        
+        .cart-container {
+            width: 50%;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table-box {
+            padding: 20px;
+            border: 1px solid #ddd;
+            
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-top: 60px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: normal;
+            font-size: 14px;
+            color: #555;
+        }
+
+        td {
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        td img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity button {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 6px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .quantity input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            font-size: 14px;
+            background: transparent;
+            outline: none;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .action {
+            color: #d9534f;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .action:hover {
+            color: #c9302c;
+        }
+
+        .btn {
+            background-color: #3BB77E;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn-clear  {
+            background-color: #333333; /* Replace this with the actual text color */
+            color: white; /* Make sure the text is visible against the new background */
+        }
+
+        .btn-update {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .btn-proceed {
+            background-color: #3BB77E;
+        }
+
+        .btn-clear:hover, .btn-update:hover, .btn-proceed:hover {
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center; 
+            margin: 20px 0; 
+             left: 30%;
+              transform: translateX(-20%)
+        }
+        .subscription {
+            background-image: url(assets/images/photo_2.png);
+            background-size: cover;
+            background-position: center;
+            padding: 100px;
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .subscription h2 {
+            font-size: 24px;
+            margin: 0;
+            flex: 1;
+        }
+        .subscription form {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        .subscription input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+        .subscription button {
+            padding: 10px;
+            background-color: #274C5B;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        .subscription button:hover {
+            background-color: #45a049;
+        }
+        .feature-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .feature {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            max-width: 300px;
+            text-align: left;
+        }
+        .feature img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .feature h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        footer {
+            background-color: #ffffff;
+            padding: 40px 20px;
+            border-top: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+            color: #000;
+            margin-top: auto;
+        }
+        .footer-top {
+            background: rgba(255, 255, 255, 1);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+        .footer-top div {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-top h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .footer-top ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-top li {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .footer-top a {
+            text-decoration: none;
+            color: #000;
+        }
+        .footer-top a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        .footer-bottom p {
+            margin: 0;
+        }
+        .twittericon{
+             color: #3BB77E;
+            font-size: 20px; 
+;
+        }
+
+      
+
+      
+        @media (max-width: 498px) {
+            .search-bar-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar input {
+                margin-top: 10px;
+                margin-right: 0;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .icons {
+                margin-top: 10px;
+            }
+
+            .subscription {
+                flex-direction: column;
+                padding: 20px;
+                border-radius: 0;
+            }
+
+            .subscription h2 {
+                margin-bottom: 20px;
+            }
+
+            .feature-container {
+                flex-direction: column;
+            }
+
+            .feature {
+                margin-bottom: 20px;
+            }
+            .social-links {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .social-links1 a {
+                display: inline-block;
+                margin-left: 10px;
+                color: #3BB77E; 
+                text-decoration: none;
+                font-size: 70px; 
+            }
+
+            .social-links a:hover {
+                color: #2F9D68; 
+            }
+
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="assets/images/logo2.jpeg" alt="Logo" style="border-radius: 100px;">
+            </a>
+            <div class="location">
+                <i class="fa-solid fa-location-dot" style="color: #fff; font-size: 14px;"></i>
+                <span id="location-text">Your Location</span>
+                <span id="weather-report">Weather: Loading...</span>
+            </div>
+        </div>
+        <div class="search-bar-container">
+            <div class="search-bar">
+                <select>
+                    <option>All Categories</option>
+                    <option>Vegetables</option>
+                    <option>Fruits</option>
+                    <option>Dairy</option>
+                </select>
+                <input type="text" placeholder="Search for products...">
+            </div>
+            <div class="search-icon">
+                <img src="assets/images/Search-btn.png" alt="Search">
+            </div>
+        </div>
+
+        <div class="icons">
+            <a href="wishlist2.html">
+            <img src="assets/images/Wishlist-1.png" alt="Wishlist">
+            </a>
+            <a href="cart.html">
+            <img src="assets/images/Cart-1.png" alt="Cart">
+            </a>
+            <div class="profile-icon">
+                <img src="assets/images/Profile.png" alt="Profile">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <div class="background">
+        <h1 class="breadcrumbs">Home / Shopping Cart</h1>
+        <h2 class="title">Shopping Cart</h2>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="assets/images/apple.jpg" alt="Product 1">
+                    apple
+                </td>
+                <td> ₹.10.00</td>
+                <td>
+                    <div class="quantity">
+                        <button>-</button>
+                        <input type="text" value="1">
+                        <button>+</button>
+                    </div>
+                </td>
+                <td class="total"> ₹.10.00</td>
+                <td><span class="action">Remove</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="assets/images/apple.jpg" alt="Product 1">
+                    apple
+                </td>
+                <td> ₹.10.00</td>
+                <td>
+                    <div class="quantity">
+                        <button>-</button>
+                        <input type="text" value="1">
+                        <button>+</button>
+                    </div>
+                </td>
+                <td class="total"> ₹.10.00</td>
+                <td><span class="action">Remove</span></td>
+            </tr>
+            <!-- Repeat rows as necessary -->
+        </tbody>
+    </table>
+    
+    <div class="buttons">
+        <button class="btn btn-clear">Back to Home</button>
+        <button class="btn btn-proceed">Proceed to Checkout</button>
+    </div>
+
+    <div class="subscription">
+          <h2>Subscribe to our Newsletter</h2>
+          <form action="#" method="post">
+              <input type="email" name="email" placeholder="Your Email Address" required>
+              <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="feature-container">
+          <div class="feature">
+              <img src="assets/images/Best Prices & Deals.png" alt="Deals">
+              <div>
+                  <h3>Best Prices & Deals</h3>
+                  <p>Don't miss our daily amazing deals and prices</p>
+              </div>
+          </div>
+          <div class="feature">
+              <img src="assets/images/Refundable.png" alt="Refund">
+              <div>
+                  <h3>Refundable</h3>
+                  <p>If your items have damage we agree to refund it</p>
+              </div>
+          </div>
+          <div class="feature">
+              <img src="assets/images/Free delivery.png" alt="Free Delivery">
+              <div>
+                  <h3>Free Delivery</h3>
+                  <p>Do purchase over ₹50 and get free delivery anywhere</p>
+              </div>
+          </div>
+        </div>
+        </div>
+        <footer>
+        <div class="footer-top">
+          <div>
+              <h4>Drop It</h4>
+              <img src="assets/images/logo2.jpeg" alt="Logo" style="width: 30px; height:30px;">
+              
+              <ul>
+                  <li><a href="#">Company Information</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Store Locations</a></li>
+                  <li><a href="#">Affiliate Program</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Customer Service</h4>
+              <ul>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">Order Tracking</a></li>
+                  <li><a href="#">Returns & Exchanges</a></li>
+                  <li><a href="#">Shipping & Delivery</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="#">New Arrivals</a></li>
+                  <li><a href="#">Best Sellers</a></li>
+                  <li><a href="#">Special Offers</a></li>
+                  <li><a href="#">Gift Cards</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Help Center</h4>
+              <ul>
+                  <li><a href="#">Payments</a></li>
+                  <li><a href="#">Refund</a></li>
+                  <li><a href="#">Checkout</a></li>
+                  <li><a href="#">Q&A</a></li>
+                  <li><a href="#">Privacy Policy</a></li>                
+              </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div style="display: flex; align-items: center;">
+              <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="#">Privacy Policy</a></p>
+
+          </div>
+          <div class="social-links1">
+              <a href="#" class="twittericon"><i class="fab fa-facebook-f" ></i></a>
+              <a href="#" class="twittericon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="twittericon"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="twittericon"><i class="fab fa-linkedin-in" ></i></a>
+          </div>
+        </div>
+        </footer>
+</body>
+</html>

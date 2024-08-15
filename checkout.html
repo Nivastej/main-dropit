@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop IT Checkout</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: quicksand, sans-serif;
+      }
+      .navbar {
+          display: flex;
+          align-items: center;
+          background-color: #3BB77E; /* Green background */
+          padding: 10px;
+      }
+        .header {
+          background-color: #3BB77E;
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .logo {
+          display: flex;
+          align-items: center;
+        }
+        .logo img {
+          height: 40px;
+          margin-right: 10px;
+        }
+        .search-bar-container {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          margin: 0 20px;
+        }
+        .search-bar {
+          display: flex;
+          align-items: center;
+          flex: 1;
+        }
+        .search-bar select, .search-bar input {
+          height: 30px;
+          border: none;
+          padding: 0 10px;
+        }
+        .search-bar select {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          margin-right: -1px; /* Slight overlap to connect input and select */
+        }
+        .search-bar input {
+          flex: 1;
+          border-radius: 5px;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        .search-icon img {
+          height: 25px;
+          cursor: pointer;
+        }
+        .icons {
+          display: flex;
+          align-items: center;
+        }
+        .icons img {
+          height: 25px;
+          margin: 0 10px;
+          cursor: pointer;
+        }
+        .profile-icon img {
+          height: 30px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .delivery-address button {
+            background-color: #3BB77E; /* Change this to the desired color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .delivery-address button:hover {
+            background-color: #228B22; /* Darker shade for hover effect */
+        }
+
+      .order-summary,
+      .delivery-address.delivery-address {
+            padding: 20px;
+            margin: 20px 0;
+            border: none; /* Remove border */
+        }
+        
+
+        .separator {
+            border: 1px solid #9CFFACA3; /* Green border */
+            margin: 20px 0; /* Space around the separator */
+        }
+
+        
+        .explore-section {
+            padding: 20px;
+        }
+
+        .explore-header {
+            display: flex;
+            justify-content: flex-start; /* Ensure items are aligned in a row */
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .explore-header p {
+            font-size: 24px;
+            color: #000000;
+            margin: 0;
+            margin-right: 15px; /* Adjust margin to the right instead of left */
+            font-weight: 600;
+        }
+
+        .explore-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .explore-button {
+            background: none;
+            border: none;
+            color: #3BB77E;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+
+        .arrow-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100px;
+        }
+
+        .arrow {
+          cursor: pointer;
+        }
+
+        .arrow img {
+          width: 50px;
+          height: 50px;
+          transition: transform 0.3s;
+        }
+
+        .arrow:hover img {
+          transform: scale(1.1);
+        }
+
+
+        .categories {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            padding: 10px;
+            gap: 10px;
+            scrollbar-width: thin; /* Firefox */
+        }
+
+        .category-list {
+            display: flex;
+            gap: 20px; /* Space between items */
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 150px; /* Set a minimum width for each item */
+            cursor: pointer;
+        }
+        .category-item img {
+            width: 100px; /* Set the desired width */
+            height: auto; /* Adjust height automatically to maintain aspect ratio */
+            border-radius: 5px; /* Optional: Add rounded corners to images */
+        }
+
+
+
+        .apply-button {
+            background-color: transparent;
+            border: 2px solid #3BB77E; /* Green border */
+            color: #3BB77E; /* Green text */
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+        .apply-button:hover {
+            background-color: #3BB77E; /* Green background on hover */
+            color: white; /* White text on hover */
+        }
+
+
+
+
+      .newsletter {
+        background-color: #00aeef;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .newsletter input[type="email"] {
+        padding: 10px;
+        width: 300px;
+        margin-right: 10px;
+      }
+      .newsletter input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      .footer {
+        background-color: #f1f1f1;
+        color: black;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .footer a {
+        color: #4caf50;
+      }
+      .footer img {
+        width: 30px;
+        margin: 5px;
+      }
+      .progress-container {
+        display: flex;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+      }
+      .step:not(:last-child)::after {
+        content: '';
+        width: 40px;
+        height: 2px;
+        background-color: gray;
+        margin: 0 10px;
+      }
+      .completed {
+        color: green;
+      }
+      .completed::after {
+        background-color: green;
+      }
+      .step-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: gray;
+        color: white;
+        margin: 0 10px;
+      }
+      .completed .step-icon {
+        background-color: green;
+      }
+        .subscription {
+          background-image: url(assets/images/photo_2.png);
+          background-size: cover;
+          background-position: center;
+          padding: 100px;
+          color: white;
+          text-align: center;
+          border-radius: 50px;
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+        }
+        .subscription h2 {
+          font-size: 24px;
+          margin: 0;
+          flex: 1;
+        }
+        .subscription form {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 10px;
+          flex: 1;
+        }
+        .subscription input {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          width: 100%;
+          max-width: 300px;
+        }
+        .subscription button {
+          padding: 10px;
+          background-color: #274C5B;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          font-size: 18px;
+        }
+        .subscription button:hover {
+          background-color: #45a049;
+        }
+        .feature-container {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+        }
+        .feature {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          max-width: 300px;
+          text-align: left;
+        }
+        .feature img {
+          width: 50px;
+          height: 50px;
+          margin-right: 10px;
+        }
+        .feature h3 {
+          font-size: 20px;
+          margin: 10px 0;
+        }
+        footer {
+          background-color: #ffffff;
+          padding: 40px 20px;
+          border-top: 1px solid #ccc;
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin-top: auto;
+        }
+        .footer-top {
+          background: rgba(255, 255, 255, 1);
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          max-width: 1200px;
+          margin: 0 auto;
+          gap: 20px;
+          padding-bottom: 20px;
+        }
+        .footer-top div {
+          flex: 1;
+          min-width: 200px;
+        }
+        .footer-top h4 {
+          font-size: 1.2em;
+          margin-bottom: 10px;
+        }
+        .footer-top ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        .footer-top li {
+          margin-bottom: 10px;
+          font-size: 0.9em;
+        }
+        .footer-top a {
+          text-decoration: none;
+          color: #000;
+        }
+        .footer-top a:hover {
+          text-decoration: underline;
+        }
+        .footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-top: 20px;
+          border-top: 1px solid #ccc;
+          font-size: 0.8em;
+          text-align: center;
+        }
+        .footer-bottom p {
+          margin: 0;
+        }
+        .social-links {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+        .social-links a {
+          display: inline-block;
+          margin-left: 10px;
+          color: #3BB77E;
+          text-decoration: none;
+          font-size: 25px; /* Increase the font size */
+        }
+        .social-links a:hover {
+          color: #339966;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+          .faq-item button {
+            font-size: 16px;
+          }
+        }
+        @media (max-width: 768px) {
+          .content {
+            flex-direction: column;
+          }
+          .faq, .contact-form {
+            flex: 1 1 100%;
+          }
+          .contact-form label {
+            font-size: 14px;
+          }
+          .contact-form button {
+            font-size: 16px;
+          }
+          .subscription {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+          .subscription h2, .subscription form {
+            flex: 1 1 100%;
+          }
+          .subscription form {
+            justify-content: center;
+            width: 100%;
+          }
+          .subscription input, .subscription button {
+            width: 100%;
+            max-width: none;
+          }
+        }
+        @media (max-width: 480px) {
+          .faq-item button {
+            font-size: 14px;
+            padding: 8px;
+          }
+          .contact-form input, .contact-form textarea {
+            font-size: 14px;
+          }
+          .contact-form button {
+            font-size: 16px;
+            padding: 8px;
+          }
+          .subscription input, .subscription button {
+            font-size: 14px;
+            padding: 8px;
+          }
+          .payment-icons {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+          }
+        }
+
+        @media (max-width: 1024px) {
+            .faq-item button {
+                font-size: 16px;
+            }
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .faq, .contact-form {
+                flex: 1 1 100%;
+            }
+            .contact-form label {
+                font-size: 14px;
+            }
+            .contact-form button {
+                font-size: 16px;
+            }
+            .subscription {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .subscription h2, .subscription form {
+                flex: 1 1 100%;
+            }
+            .subscription form {
+                justify-content: center;
+                width: 100%;
+            }
+            .subscription input, .subscription button {
+                width: 100%;
+                max-width: none;
+            }
+        }
+        @media (max-width: 480px) {
+            .faq-item button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .contact-form input, .contact-form textarea {
+                font-size: 14px;
+            }
+            .contact-form button {
+                font-size: 16px;
+                padding: 8px;
+            }
+            .subscription input, .subscription button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .payment-icons {
+                display: flex;
+                justify-content: center;
+                flex-grow: 1;
+            }
+            .payment-icons img {
+                height: 40px;
+                margin: 0 5px;
+            }
+        }
+
+        @media (max-width: 497px) {
+  .search-bar-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .search-bar input {
+      margin-top: 10px;
+      margin-right: 0;
+  }
+
+  .footer-top {
+      flex-direction: column;
+  }
+
+  .footer-bottom {
+      flex-direction: column;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+@media (max-width: 480px) {
+  .header {
+      flex-direction: column;
+  }
+
+  .icons {
+      margin-top: 10px;
+  }
+
+  .subscription {
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 0;
+  }
+
+  .subscription h2 {
+      margin-bottom: 20px;
+  }
+
+  .feature-container {
+      flex-direction: column;
+  }
+
+  .feature {
+      margin-bottom: 20px;
+  }
+
+  .social-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  }
+
+  .social-links1 a {
+      display: inline-block;
+      margin-left: 10px;
+      color: #3BB77E;
+      text-decoration: none;
+      font-size: 70px;
+  }
+
+  .social-links a:hover {
+      color: #2F9D68;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">
+        <a href="home.html">
+          <img src="assets/images/logo2.jpeg" alt="Logo" style="border-radius: 100px;">
+      </a>
+         
+          <div class="location">
+              <i class="fa-solid fa-location-dot" style="color: #fff; font-size: 14px;"></i>
+              <span id="location-text">Your Location</span>
+              <span id="weather-report">Weather: Loading...</span>
+          </div>
+      </div>
+      <div class="search-bar-container">
+          <div class="search-bar">
+              <select>
+                  <option>All Categories</option>
+                  <option>Vegetables</option>
+                  <option>Fruits</option>
+                  <option>Dairy</option>
+              </select>
+              <input type="text" placeholder="Search for products...">
+          </div>
+          <div class="search-icon">
+              <img src="assets/images/Search-btn.png" alt="Search">
+          </div>
+      </div>
+
+      <div class="icons">
+        <a href="wishlist2.html">
+          <img src="assets/images/Wishlist-1.png" alt="Wishlist">
+          </a>
+          <a href="cart.html">
+          <img src="assets/images/Cart-1.png" alt="Cart">
+          </a>
+          <div class="profile-icon">
+              <img src="assets/images/Profile.png" alt="Profile">
+          </div>
+      </div>
+  </div>
+  <script src="script.js"></script>
+
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="progress-container">
+            <div class="step completed">
+              <div class="step-icon">1</div>
+              <div>Cart</div>
+            </div>
+            <div class="step">
+              <div class="step-icon">2</div>
+              <div>Details</div>
+            </div>
+            <div class="step">
+              <div class="step-icon">3</div>
+              <div>Payment</div>
+            </div>
+          </div>
+          <h2 class="mt-5">Delivery Address</h2>
+          <form class="delivery-address">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="first-name"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="last-name"
+                placeholder="Enter your last name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="Enter your address"
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  placeholder="Enter your city"
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="state">State</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  placeholder="Enter your state"
+                />
+              </div>
+              <div class="form-group col-md-2">
+                <label for="zip">Zip Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zip"
+                  placeholder="Enter your zip code"
+                />
+              </div>
+            </div>
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="same-address"
+              />
+              <label class="form-check-label" for="same-address"
+                >Shipping address is the same as billing address</label
+              >
+            </div>
+            <button type="submit" class="btn btn-primary">Continue to Payment</button>
+          </form>
+        </div>
+        <div class="col-lg-4">
+          <div class="order-summary">
+            <h4>Order Summary</h4>
+            <ul class="list-group mb-3">
+              <li
+                class="list-group-item d-flex justify-content-between lh-condensed"
+              >
+                <div>
+                  <h6 class="my-0">Product name</h6>
+                  <small class="text-muted">Brief description</small>
+                </div>
+                <span class="text-muted">$12</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between lh-condensed"
+              >
+                <div>
+                  <h6 class="my-0">Second product</h6>
+                  <small class="text-muted">Brief description</small>
+                </div>
+                <span class="text-muted">$8</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between lh-condensed"
+              >
+                <div>
+                  <h6 class="my-0">Third item</h6>
+                  <small class="text-muted">Brief description</small>
+                </div>
+                <span class="text-muted">$5</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between bg-light"
+              >
+                <div class="text-success">
+                  <h6 class="my-0">Promo code</h6>
+                  <small>EXAMPLECODE</small>
+                </div>
+                <span class="text-success">−$5</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between"
+              >
+                <span>Subtotal</span>
+                <strong>$20</strong>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between"
+              >
+                <span>Sales Tax (8.25%)</span>
+                <strong>$1.65</strong>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between"
+              >
+                <span>Total Due</span>
+                <strong>$21.65</strong>
+              </li>
+            </ul>
+            <form class="card p-2">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Promo code"
+                />
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-secondary">Redeem</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="separator" />
+    <div class="container explore-section">
+        <div class="explore-header">
+            <p>Explore More Items</p>
+            <div class="explore-buttons">
+                <button class="explore-button">Best Seller</button>
+                <button class="explore-button">Featured</button>
+                <button class="explore-button">Discounted</button>
+            </div>
+           
+        </div>
+        <div class="categories">
+            <div class="category-list">
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/3/ee019487-1695-47d4-8aa6-905f86ccbcd0_10ee16a0-8c4e-4895-a76e-876e1e33a40e" alt="Vegetables">
+                    <h5>Vegetables</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/3/dc7920a3-9186-4c16-b2f1-403d96afb92a_7d9566ae-b745-4ef3-8c25-03689c5a75a7" alt="Fruits">
+                    <h5>Fruits</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/23/4abc4052-ccd8-4b56-8b75-f93687c15c16_dabee874-2165-4169-9ee9-4fde76038b40" alt="Dairy">
+                    <h5>Dairy</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/3/6f3cc591-0f38-4d08-ae8d-e8d79b3fc830_132ae994-8b1b-4dc5-b845-90a78fd14f3b" alt="Bakery">
+                    <h5>Bakery</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_96/NI_CATALOG/IMAGES/CIW/2024/3/9/b11388c9-f64b-44d4-a179-830b1d506103_e1ffae9d-3ab4-4207-a524-d139618a9b15" alt="Meat">
+                    <h5>Meat</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/3/0e336513-85bc-4ea5-a165-6dee4c0df64b_559a33f6-a49b-4511-8904-a34f7aae74a0" alt="Seafood">
+                    <h5>Seafood</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/3/24675341-d82c-4ffd-b4a7-fc93eb676688_d8a17acd-e4bc-4539-9507-1e269d9aefda" alt="Snacks">
+                    <h5>Snacks</h5>
+                </div>
+                <div class="category-item">
+                    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/7/18/84e4f7d5-03ab-42e2-8765-e05ecfd9d925_212a82ac-67ed-4ff1-b471-ee622b71d404" alt="Beverages">
+                    <h5>Beverages</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="subscription">
+          <h2><strong> subscribe to our Newsletter</strong></h2>
+          <form action="#" method="post">
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="feature-container">
+          <div class="feature">
+            <img src="assets/images/Best Prices & Deals.png" alt="Deals">
+            <div>
+              <h3>Best Prices & Deals</h3>
+              <p>Don't miss our daily amazing deals and prices</p>
+            </div>
+          </div>
+          <div class="feature">
+            <img src="assets/images/Refundable.png" alt="Refund">
+            <div>
+              <h3>Refundable</h3>
+              <p>If your items have damage we agree to refund it</p>
+            </div>
+          </div>
+          <div class="feature">
+            <img src="assets/images/Free delivery.png" alt="Free Delivery">
+            <div>
+              <h3>Free Delivery</h3>
+              <p>Do purchase over $50 and get free delivery anywhere</p>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="footer-top">
+            <div>
+              <h4>Drop It</h4>
+              <img src="assets/images/logo2.jpeg" alt="Logo" style="width: 30px; height: 30px;">
+              <ul>
+                <li><a href="#">Company Information</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Store Locations</a></li>
+                <li><a href="#">Affiliate Program</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Customer Service</h4>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Order Tracking</a></li>
+                <li><a href="#">Returns & Exchanges</a></li>
+                <li><a href="#">Shipping & Delivery</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Best Sellers</a></li>
+                <li><a href="#">Special Offers</a></li>
+                <li><a href="#">Gift Cards</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Help Center</h4>
+              <ul>
+                <li><a href="#">Payments</a></li>
+                <li><a href="#">Refund</a></li>
+                <li><a href="#">Checkout</a></li>
+                <li><a href="#">Q&A</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>                
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div style="display: flex; align-items: center;">
+              <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+            </div>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </footer>
+  </body>
+</html>

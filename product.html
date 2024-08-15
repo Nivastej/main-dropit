@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page - Grocery Mart</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: quicksand, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f8f8f8;
+    }
+    .header {
+      background-color: #3BB77E;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .search-bar-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      margin: 0 20px;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .search-bar select, .search-bar input {
+      height: 30px;
+      border: none;
+      padding: 0 10px;
+    }
+    .search-bar select {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      margin-right: -1px; /* Slight overlap to connect input and select */
+    }
+    .search-bar input {
+      flex: 1;
+      border-radius: 5px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .search-icon img {
+      height: 25px;
+      cursor: pointer;
+    }
+    .icons {
+      display: flex;
+      align-items: center;
+    }
+    .icons img {
+      height: 25px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .profile-icon img {
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .product-section {
+      display: flex;
+      margin-bottom: 40px;
+    }
+    .product-section .image {
+      flex: 1;
+      max-width: 50%;
+      margin-right: 20px;
+    }
+    .product-section .image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .product-section .details {
+      flex: 1;
+    }
+    .product-section .details .brand {
+      color: #2BB673;
+      font-size: 14px;
+    }
+    .product-section .details h1 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    .product-section .details .rating {
+      color: #f9a825;
+      margin: 10px 0;
+    }
+    .product-section .details .price {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .product-section .details .price del {
+      color: #888;
+      margin-left: 5px;
+    }
+    .product-section .details .discount {
+      color: #ff5722;
+      margin-left: 10px;
+    }
+    .product-section .details .description {
+      margin: 20px 0;
+    }
+    .product-section .details .add-to-cart {
+      background-color: #2BB673;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .recommendations, .explore, .newsletter {
+      margin-bottom: 40px;
+    }
+    .recommendations h2, .explore h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .recommendations .products, .explore .categories {
+      display: flex;
+      overflow-x: auto;
+    }
+    .recommendations .products .product, .explore .categories .category {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      margin-right: 10px;
+      flex: 0 0 200px;
+      text-align: center;
+
+      
+   
+  }
+    
+    .recommendations .products .product img, .explore .categories .category img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    
+    .subscription {
+      background-image: url('images/newsletter\ background.png');
+      background-size: cover;
+      background-position: center;
+      padding: 100px;
+      color: white;
+      text-align: center;
+      border-radius: 50px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .subscription h2 {
+      font-size: 24px;
+      margin: 0;
+      flex: 1;
+    }
+    .subscription form {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .subscription input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .subscription button {
+      padding: 10px;
+      background-color: #274C5B;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 18px;
+    }
+    .subscription button:hover {
+      background-color: #45a049;
+    }
+    .feature-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .feature {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      max-width: 300px;
+      text-align: left;
+    }
+    .feature img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    .feature h3 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    footer {
+      background-color: #ffffff;
+      padding: 40px 20px;
+      border-top: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+      color: #000;
+      margin-top: auto;
+    }
+    .footer-top {
+      background: rgba(255, 255, 255, 1);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+    .footer-top div {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-top h4 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .footer-top ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .footer-top li {
+      margin-bottom: 10px;
+      font-size: 0.9em;
+    }
+    .footer-top a {
+      text-decoration: none;
+      color: #000;
+    }
+    .footer-top a:hover {
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid #ccc;
+      font-size: 0.8em;
+      text-align: center;
+    }
+    .footer-bottom p {
+      margin: 0;
+    }
+    .social-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .social-links a {
+      display: inline-block;
+      margin-left: 10px;
+      color: #3BB77E;
+      text-decoration: none;
+      font-size: 25px; /* Increase the font size */
+    }
+    .social-links a:hover {
+      color: #339966;
+    }
+
+     .subscribe-to-our-newsletter {
+  overflow-wrap: break-word;
+  font-family: 'Roboto';
+  font-weight: 800;
+  font-size: 50px;
+  color: #FFFFFF;
+}
+.heading {
+  display: flex;
+  box-sizing: border-box;
+}
+ .your-email-address {
+  overflow-wrap: break-word;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ABABAB;
+}
+ .mail {
+  border-radius: 16px;
+  background: #FFFFFF;
+  position: relative;
+  margin-right: 6px;
+  padding: 28px 23px 31px 23px;
+  width: 349px;
+  box-sizing: border-box;
+}
+.subscribe {
+  overflow-wrap: break-word;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 20px;
+  color: #FFFFFF;
+ margin-left: 60px;
+}
+
+
+
+.subscribe a{
+  text-decoration: none;
+  color: white;
+}
+
+.subscribe:hover{
+  
+  background-color: #3BB77E;
+}
+
+
+
+.button {
+  border-radius: 16px;
+  background: #274C5B;
+  display: flex;
+  padding: 28px 0.9px 29px 0;
+  width: 220px;
+  box-sizing: border-box;
+}
+ .button-1 {
+  margin: 16.5px 0 21.5px 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+ .container-7 {
+  border-radius: 30px;
+  background: url(assets/images/photo_2.png) 50% / cover no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 105px 71px 100px 71px;
+  width: 1400px;
+  height: fit-content;
+  box-sizing: border-box;
+}
+ .newslatteer {
+  border-radius: 30px;
+  background: #37B5DE;
+  position: relative;
+  margin: 0 13px 130px 27px;
+  display: flex;
+  width: 1400px;
+  box-sizing: border-box;
+}
+ .group {
+  width: 52px;
+  height: 52px;
+}
+
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .faq-item button {
+        font-size: 16px;
+      }
+    }
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+      .faq, .contact-form {
+        flex: 1 1 100%;
+      }
+      .contact-form label {
+        font-size: 14px;
+      }
+      .contact-form button {
+        font-size: 16px;
+      }
+      .subscription {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .subscription h2, .subscription form {
+        flex: 1 1 100%;
+      }
+      .subscription form {
+        justify-content: center;
+        width: 100%;
+      }
+      .subscription input, .subscription button {
+        width: 100%;
+        max-width: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .faq-item button {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .contact-form input, .contact-form textarea {
+        font-size: 14px;
+      }
+      .contact-form button {
+        font-size: 16px;
+        padding: 8px;
+      }
+      .subscription input, .subscription button {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .payment-icons {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <a href="home.html">
+        <img src="assets/images/logo2.jpeg" alt="Logo" style="border-radius: 100px;">
+    </a>
+        <span>DROP IT</span>
+        <div class="location">
+            <i class="fa-solid fa-location-dot" style="color: #fff; font-size: 14px;"></i>
+            <span id="location-text">Your Location</span>
+            <span id="weather-report">Weather: Loading...</span>
+        </div>
+    </div>
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <select>
+                <option>All Categories</option>
+                <option>Vegetables</option>
+                <option>Fruits</option>
+                <option>Dairy</option>
+            </select>
+            <input type="text" placeholder="Search for products...">
+        </div>
+        <div class="search-icon">
+            <img src="assets/images/Search-btn.png" alt="Search">
+        </div>
+    </div>
+
+    <div class="icons">
+      <a href="wishlist2.html">
+      <img src="assets/images/Wishlist-1.png" alt="Wishlist">
+      </a>
+      <a href="cart.html">
+      <img src="assets/images/Cart-1.png" alt="Cart">
+      </a>
+      <div class="profile-icon">
+          <img src="assets/images/Profile.png" alt="Profile">
+      </div>
+  </div>
+</div>
+
+  <div class="main-content">
+    <div class="product-section">
+      <div class="image">
+        <img src="https://img.freepik.com/premium-photo/side-view-fresh-ripe-cherry-tomatoes-scattered-from-wooden-bowl-black-background_960396-564653.jpg?w=740" alt="Tomato Local">
+      </div>
+      <div class="details">
+        <span class="brand">Brand Name</span>
+        <h1>Tomato Local</h1>
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ (0)
+        </div>
+        <div class="price">
+          ₹64 <del>₹80</del> <span class="discount">10% off</span>
+        </div>
+        <button class="add-to-cart">Add</button>
+        <div class="description">
+          <h3>Product Details</h3>
+          <p>Why are tomatoes healthy? Tomatoes are loaded with a substance called lycopene. It gives them their bright red color and helps protect them from the ultraviolet rays of the sun...</p>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="recommendations">
+      <h2>More recommendations</h2>
+      <div class="products">
+        <!-- Repeat product block as needed -->
+        <div class="product">
+          <img src="https://img.freepik.com/premium-photo/side-view-fresh-ripe-cherry-tomatoes-scattered-from-wooden-bowl-black-background_960396-564653.jpg?w=740" alt="Product">
+          <p>Tomato Local</p>
+          <p>1kg</p>
+          <p class="price">₹64</p>
+          <button style="padding: 5px 10px; background-color: #2BB673; color: white; border: none; border-radius: 5px; cursor: pointer;">Add</button>
+        </div>
+      </div>
+    </div>
+
+   
+
+      
+
+    <div class="explore">
+      <h2>Explore</h2>
+      <div class="categories">
+        <!-- Repeat category block as needed -->
+        <div class="category">
+          <img src="https://cdn.zeptonow.com/production///tr:w-420,ar-486-333,pr-true,f-auto,q-80/cms/category/2b5f2be5-cada-4cd7-b0af-e46c0c065f71.png" alt="Category">
+          <p>Fruits & Vegetables</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!--- <div class="subscription">
+    <h2>Subscribe to our Newsletter</h2>
+    <form action="#" method="post">
+      <input type="email" name="email" placeholder="Your Email Address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>-->
+
+
+  <div class="newslatteer">
+    <div class="container-7">
+      <div class="heading">
+        <span class="subscribe-to-our-newsletter">
+        Subscribe to<br />
+        our Newsletter<br />
+        
+        </span>
+      </div>
+      <form action="/action_page.php">
+        
+      <div class="button-1">
+        <div class="mail">
+          <span class="your-email-address">
+            <label for="email"></label>
+        <input type="email" id="email" name="email">
+          Email Address
+          </span>
+        </div>
+        <div class="button">
+          <span class="subscribe">
+           <a href="#">Subscribe</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-container">
+    <div class="feature">
+      <img src="assets/images/Best Prices & Deals.png" alt="Deals">
+      <div>
+        <h3>Best Prices & Deals</h3>
+        <p>Don't miss our daily amazing deals and prices</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="assets/images/Refundable.png" alt="Refund">
+      <div>
+        <h3>Refundable</h3>
+        <p>If your items have damage we agree to refund it</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="assets/images/Free delivery.png" alt="Free Delivery">
+      <div>
+        <h3>Free Delivery</h3>
+        <p>Do purchase over $50 and get free delivery anywhere</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <h4>Drop It</h4>
+        <img src="assets/images/logo2.jpeg" alt="Logo" style="width: 30px; height: 30px;">
+        <ul>
+          <li><a href="#">Company Information</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Store Locations</a></li>
+          <li><a href="#">Affiliate Program</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Order Tracking</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Special Offers</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help Center</h4>
+        <ul>
+          <li><a href="#">Payments</a></li>
+          <li><a href="#">Refund</a></li>
+          <li><a href="#">Checkout</a></li>
+          <li><a href="#">Q&A</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>                
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display: flex; align-items: center;">
+        <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+<script src="script.js"></script>
+</body>
+</html>
